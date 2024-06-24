@@ -1,0 +1,39 @@
+<mat-card>
+    <b><span>Manage Users</span></b>
+</mat-card>
+<hr>
+<mat-card>
+    <mat-form-field appearance="standard">
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" #input>
+    </mat-form-field>
+</mat-card>
+
+<div class="responsive_circle">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-cotainer matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let element">{{element.name}}</td>
+        </ng-cotainer>
+
+        <ng-cotainer matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef>Email</th>
+            <td mat-cell *matCellDef="let element">{{element.email}}</td>
+        </ng-cotainer>
+
+        <ng-cotainer matColumnDef="contactNumber">
+            <th mat-header-cell *matHeaderCellDef>Contact Number</th>
+            <td mat-cell *matCellDef="let element">{{element.contactNumber}}</td>
+        </ng-cotainer>
+
+        <ng-cotainer matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Action</th>
+            <td mat-cell *matCellDef="let element" class="action-link">
+                <mat-slide-toggle (change)="onChange($event.checked,element.id)" matTootip="Activate or Deactivate User"
+                    [checked]='element.status'></mat-slide-toggle>
+            </td>
+        </ng-cotainer>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+        <tr mat-row *matRowDef="let row;columns:displayedColumns;"></tr>
+    </table>
+</div>
